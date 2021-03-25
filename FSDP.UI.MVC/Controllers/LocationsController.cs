@@ -14,6 +14,7 @@ namespace FSDP.UI.MVC.Controllers
     {
         private FSDPEntities db = new FSDPEntities();
 
+        [Authorize(Roles = "Admin")]
         // GET: Locations
         public ActionResult Index()
         {
@@ -21,6 +22,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(locations.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,6 +38,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(location);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Create
         public ActionResult Create()
         {
@@ -43,6 +46,7 @@ namespace FSDP.UI.MVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Locations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -61,6 +65,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(location);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -77,6 +82,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(location);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Locations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -94,6 +100,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(location);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -109,6 +116,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(location);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

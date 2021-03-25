@@ -139,18 +139,22 @@ namespace FSDP.DATA.EF.Metadata
         public string Image { get; set; }
 
         [Display(Name = "Instrument 1")]
+        [DisplayFormat(NullDisplayText = "[Not Given]")]
         [StringLength(50, ErrorMessage = "* Instrument 1 cannot exceed 50 characters *")]
         public string Instrument1 { get; set; }
 
         [Display(Name = "Instrument 2")]
+        [DisplayFormat(NullDisplayText = "[Not Given]")]
         [StringLength(50, ErrorMessage = "* Instrument 2 cannot exceed 50 characters *")]
         public string Instrument2 { get; set; }
 
         [UIHint("MultilineText")]
+        [DisplayFormat(NullDisplayText = "[None Given]")]
         [StringLength(500, ErrorMessage = "* Related skills cannot exceed 500 characters *")]
         public string RelatedSkills { get; set; }
 
         [Display(Name = "Upload Resume")]
+        [DisplayFormat(NullDisplayText = "[No Resume on File]")]
         [StringLength(75, ErrorMessage = "* Resume file name cannot exceed 75 characters *")]
         public string ResumeFilename { get; set; }
     }

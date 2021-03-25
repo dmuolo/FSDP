@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using FSDP.DATA.EF;
 using FSDP.UI.MVC.Utilities;
+using Microsoft.AspNet.Identity;
 
 namespace FSDP.UI.MVC.Controllers
 {
@@ -16,6 +17,33 @@ namespace FSDP.UI.MVC.Controllers
     {
         private FSDPEntities db = new FSDPEntities();
 
+        //#region Ajax Delete
+        //[AcceptVerbs(HttpVerbs.Post)]
+        //public JsonResult AjaxDelete(int id)
+        //{
+        //    //get the publisher from the database
+        //    UserDetail user = db.UserDetails.Find(id);
+
+        //    //remove the publisher from EF
+        //    db.UserDetails.Remove(user);
+
+        //    //save the changes to the database
+        //    db.SaveChanges();
+
+        //    //create a message to send to the user as a JSON result
+        //    var message = $"Deleted the following user from the database: {user.FirstName} {user.LastName}";
+
+        //    //return the jsonResult
+        //    return Json(new
+        //    {
+        //        id = id,
+        //        message = message
+
+        //    });
+        //}
+        //#endregion
+
+        [Authorize(Roles = "Admin")]
         // GET: UserDetails
         public ActionResult Index()
         {
@@ -116,15 +144,14 @@ namespace FSDP.UI.MVC.Controllers
                     if (goodExts.Contains(ext.ToLower()) && (resume.ContentLength <= 4194304))
                     {
                         resumeName = Guid.NewGuid() + ext.ToLower();
-                        string savePath = Server.MapPath("~/Content/resumes/");   
+                        resume.SaveAs(Server.MapPath("~/Content/resumes/" + resumeName));
 
                         if (userDetail.ResumeFilename != null)
                         {
-                            string path = Server.MapPath("~/Content/resumes/");
+                            System.IO.File.Delete(Server.MapPath("~/Content/resumes/" + userDetail.ResumeFilename));
                         }
 
                         userDetail.ResumeFilename = resumeName;
-                        resume.SaveAs(savePath + resumeName);
                     }
                 }
                 db.Entry(userDetail).State = EntityState.Modified;

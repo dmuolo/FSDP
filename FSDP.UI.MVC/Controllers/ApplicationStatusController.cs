@@ -14,12 +14,14 @@ namespace FSDP.UI.MVC.Controllers
     {
         private FSDPEntities db = new FSDPEntities();
 
+        [Authorize(Roles = "Admin, Manager")]
         // GET: ApplicationStatus
         public ActionResult Index()
         {
             return View(db.ApplicationStatus.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: ApplicationStatus/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,12 +37,14 @@ namespace FSDP.UI.MVC.Controllers
             return View(applicationStatu);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: ApplicationStatus/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: ApplicationStatus/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -58,6 +62,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(applicationStatu);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: ApplicationStatus/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,6 +78,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(applicationStatu);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: ApplicationStatus/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,6 +95,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(applicationStatu);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: ApplicationStatus/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -104,6 +111,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(applicationStatu);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: ApplicationStatus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
