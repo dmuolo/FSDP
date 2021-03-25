@@ -1,7 +1,11 @@
-﻿using FSDP.UI.MVC.Models;
+﻿using FSDP.DATA.EF;
+using FSDP.UI.MVC.Models;
+using FSDP.UI.MVC.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -145,19 +149,82 @@ namespace FSDP.UI.MVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase image, HttpPostedFileBase resumeFilename)
         {
             if (ModelState.IsValid)
             {
+                #region Image & Resume File Upload
+                string imgName = "noImage.png";
+
+                if (image != null)
+                {
+                    imgName = image.FileName;
+
+                    string ext = imgName.Substring(imgName.LastIndexOf('.'));
+                    string[] goodExts = { ".jpg", ".jpeg", ".gif", ".png", ".jfif" };
+                    if (goodExts.Contains(ext.ToLower()) && (image.ContentLength <= 4194304))
+                    {
+                        imgName = Guid.NewGuid() + ext.ToLower();
+                        string savePath = Server.MapPath("~/Content/img/UserImage/");
+                        Image convertedImage = Image.FromStream(image.InputStream);
+                        int maxImageSize = 2000;
+                        int maxThumbSize = 150;
+                        ImageService.ResizeImage(savePath, imgName, convertedImage, maxImageSize, maxThumbSize);
+                    }
+                    else
+                    {
+                        imgName = "NoImage.png";
+                    }
+                }
+
+                string resumeName = "";
+
+                if (resumeFilename != null)
+                {
+                    resumeName = resumeFilename.FileName;
+
+                    string ext = resumeName.Substring(resumeName.LastIndexOf('.'));
+                    string[] goodExts = { ".docx", ".pdf", ".doc" };
+                    if (goodExts.Contains(ext.ToLower()) && (resumeFilename.ContentLength <= 4194304))
+                    {
+                        resumeName = Guid.NewGuid() + ext.ToLower();
+                        string savePath = Server.MapPath("~/Content/resumes/");
+                        resumeFilename.SaveAs(savePath + resumeName);
+                    }
+                    else
+                    {
+                        resumeName = "";
+                    }
+                }
+                #endregion
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+                    #region Custom User Details
+                    UserDetail newUserDetail = new UserDetail();
+                    newUserDetail.UserId = user.Id;
+                    newUserDetail.FirstName = model.FirstName;
+                    newUserDetail.ResumeFilename = resumeName;
+                    newUserDetail.Image = imgName;
+                    newUserDetail.LastName = model.LastName;
+                    newUserDetail.Instrument1 = model.Instrument1;
+                    newUserDetail.Instrument2 = model.Instrument2;
+                    newUserDetail.RelatedSkills = model.RelatedSkills;
+
+                    FSDPEntities db = new FSDPEntities();
+                    db.UserDetails.Add(newUserDetail);
+                    db.SaveChanges();
+
+                    UserManager.AddToRole(user.Id, "Employee");
+
+                    #endregion
+                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    //ViewBag.Link = callbackUrl;
+                    return View("Login");
                 }
                 AddErrors(result);
             }

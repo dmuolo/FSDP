@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace FSDP.UI.MVC.Models
 {
@@ -64,6 +65,35 @@ namespace FSDP.UI.MVC.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "First Name")]
+        [StringLength(50, ErrorMessage = "* First Name cannot exceed 50 characters *")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        [StringLength(50, ErrorMessage = "* Last Name cannot exceed 50 characters *")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Instrument 1")]
+        [StringLength(50, ErrorMessage = "* Instrument 1 cannot exceed 50 characters *")]
+        public string Instrument1 { get; set; }
+
+        [Display(Name = "Instrument 2")]
+        [StringLength(50, ErrorMessage = "* Instrument 2 cannot exceed 50 characters *")]
+        public string Instrument2 { get; set; }
+
+        [Display(Name = "Related Skills")]
+        [StringLength(500, ErrorMessage = "* Related Skills cannot exceed 500 characters *")]
+        public string RelatedSkills { get; set; }
+
+        [StringLength(150, ErrorMessage = "* Image file name cannot exceed 150 characters *")]
+        public string Image { get; set; }
+
+        [Display(Name = "Resume")]
+        [StringLength(75, ErrorMessage = "* Resume file name cannot exceed 75 characters *")]
+        public string ResumeFilename { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

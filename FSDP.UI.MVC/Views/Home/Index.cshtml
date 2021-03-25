@@ -2,88 +2,16 @@
     ViewBag.Title = "Home";
 }
 
-<!--  Modal -->
-<div class="modal fade" id="listingModal" tabindex="-1" role="dialog" aria-labelledby="listingModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header px-lg-5">
-                <h5 class="modal-title" id="listingModalLabel">Add Listing</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body px-lg-5">
-                <form action="#">
-                    <div class="row">
-                        <div class="form-group col-lg-6">
-                            <label for="fullName">Full name</label>
-                            <input class="form-control form-control-lg" id="fullName" type="text" name="fullname" placeholder="Your full name">
-                        </div>
-                        <div class="form-group col-lg-6">
-                            <label for="email">Email Address</label>
-                            <input class="form-control form-control-lg" id="email" type="email" name="email" placeholder="Your email address">
-                        </div>
-                        <div class="form-group col-lg-6">
-                            <label for="fullName">Listing Type</label>
-                            <select class="selectpicker" id="listingType" name="listing-type" data-style="bs-select-form-control" data-title="What do you want to add" data-width="100%" required>
-                                <option value="tool">Tool</option>
-                                <option value="resource">Resource</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-lg-6">
-                            <label for="istingTitle">Listing title</label>
-                            <input class="form-control form-control-lg" id="istingTitle" type="text" name="listing-title" placeholder="Title of your title">
-                        </div>
-                        <div class="form-group col-lg-6">
-                            <label for="listingUrl">Listing URL</label>
-                            <input class="form-control form-control-lg" id="listingUrl" type="text" name="listing-url" placeholder="Listing website url">
-                        </div>
-                        <div class="form-group col-lg-6">
-                            <label for="listingCategory">Listing category</label>
-                            <select class="selectpicker" id="listingCategory" name="listing-category" data-style="bs-select-form-control" data-title="Select listing category" data-width="100%" required>
-                                <option value="">Marketing</option>
-                                <option value="">Idea generation</option>
-                                <option value="">Idea generation</option>
-                                <option value="">Design</option>
-                                <option value="">Naming</option>
-                                <option value="">Domain names</option>
-                                <option value="">Sales</option>
-                                <option value="">Finance</option>
-                                <option value="">Project management</option>
-                                <option value="">Hosting</option>
-                                <option value="">Social tools</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <label for="listingDescription">Listing description</label>
-                            <textarea class="form-control form-control-lg" id="listingDescription" name="listing-description" rows="5" placeholder="Add a small brief about your listing."></textarea>
-                        </div>
-                        <div class="form-group col-lg-6 mb-lg-0">
-                            <label for="listingThumb">Listing thumbnail</label>
-                            <input class="form-control form-control-lg-2" id="listingThumb" type="file" name="listing-thumb">
-                        </div>
-                        <div class="form-group col-lg-6 mb-lg-0">
-                            <label for="listingCover">Listing cover</label>
-                            <input class="form-control form-control-lg-2" id="listingCover" type="file" name="listing-cover">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer justify-content-start px-lg-5">
-                <button class="btn btn-primary" type="submit">Submit listing</button>
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Hero section-->
 <section class="hero-home py-5">
     <div class="container pt-5">
         <div class="row">
             <div class="col-lg-7 mx-auto text-center">
-                <p class="h6 text-uppercase text-primary mb-3">Listings</p>
-                <h1 class="mb-5">A curated directory of tools and resources to build your startup.</h1>
+                <p class="h6 text-uppercase text-primary mb-3">Search Open Positions</p>
+                <h1 class="mb-5">Find the position that suits your skills</h1>
                 <form class="p-2 rounded shadow-sm bg-white" action="#">
                     <div class="input-group">
-                        <input class="form-control border-0 mr-2" type="search" placeholder="Search tools and resources...">
+                        <input class="form-control border-0 mr-2" type="search" placeholder="Search by position title...">
                         <div class="input-group-append rounded">
                             <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search"></i></button>
                         </div>
@@ -106,21 +34,21 @@
                                     <use xlink:href="#list-details-1"> </use>
                                 </svg>
                                 <h2 class="h5">Upload Your Resume</h2>
-                                <p class="text-muted text-small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                                <p class="text-muted text-small mb-0">You can do this when you sign up for an account or later on.</p>
                             </div>
                             <div class="col-lg-4 mb-4 mb-lg-0">
                                 <svg class="svg-icon mb-3 text-primary svg-icon-big">
                                     <use xlink:href="#survey-1"> </use>
                                 </svg>
                                 <h2 class="h5">Browse Openings</h2>
-                                <p class="text-muted text-small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                                <p class="text-muted text-small mb-0">Find an opening near you that suits your skills.</p>
                             </div>
                             <div class="col-lg-4">
                                 <svg class="svg-icon mb-3 text-primary svg-icon-big">
                                     <use xlink:href="#stack-1"> </use>
                                 </svg>
                                 <h2 class="h5">One-Click Apply!</h2>
-                                <p class="text-muted text-small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                                <p class="text-muted text-small mb-0">Just click apply... it's that easy!</p>
                             </div>
                         </div>
                     </div>
@@ -140,27 +68,27 @@
             <div class="col-lg-4 mb-4 mb-lg-0">
                 <div class="card reset-anchor border-0 shadow h-100 hover-transition">
                     <div class="card-body p-4 p-lg-5">
-                        <div class="essential-tool-img mb-4 mx-auto" style="background: url(~/Content/img/tool-1.png)"></div>
-                        <h3 class="h5"> <a class="stretched-link reset-anchor" href="detail.html">Management and Tracking of Job Openings</a></h3>
-                        <p class="text-small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div class="essential-tool-img mb-4 mx-auto" style="background: url(/Content/img/data.png)"></div>
+                        <h3 class="h5"> <a class="stretched-link reset-anchor">Management and Tracking of Job Data</a></h3>
+                        <p class="text-small text-muted mb-0">Managers and admins have varying access across the application for easy management of data.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 mb-4 mb-lg-0">
                 <div class="card reset-anchor border-0 shadow h-100 hover-transition">
                     <div class="card-body p-4 p-lg-5">
-                        <div class="essential-tool-img mb-4 mx-auto" style="background: url(~/Content/img/tool-2.png)"></div>
-                        <h3 class="h5"> <a class="stretched-link reset-anchor" href="detail.html">Easy to Use Application Process</a></h3>
-                        <p class="text-small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div class="essential-tool-img mb-4 mx-auto" style="background: url(/Content/img/application.png)"></div>
+                        <h3 class="h5"> <a class="stretched-link reset-anchor">Applications Made Easy</a></h3>
+                        <p class="text-small text-muted mb-0">Employees and prospective employees can create an account and upload their resume. With the simple click of a button, they can apply to any open position!</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="card reset-anchor border-0 shadow h-100 hover-transition">
                     <div class="card-body p-4 p-lg-5">
-                        <div class="essential-tool-img mb-4 mx-auto" style="background: url(~/Content/img/tool-3.png)"></div>
-                        <h3 class="h5"> <a class="stretched-link reset-anchor" href="detail.html">Report of Applicants for Managers</a></h3>
-                        <p class="text-small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div class="essential-tool-img mb-4 mx-auto" style="background: url(/Content/img/report.png)"></div>
+                        <h3 class="h5"> <a class="stretched-link reset-anchor">Application Reports</a></h3>
+                        <p class="text-small text-muted mb-0">Managers have easy access to application reports for their districts.</p>
                     </div>
                 </div>
             </div>
@@ -172,7 +100,7 @@
     <div class="container pb-5">
         <header class="text-center mb-5">
             <h2 class="mb-1">Explore by position</h2>
-            <p class="text-muted text-small">Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+            <p class="text-muted text-small">Click a category to see open positions</p>
         </header>
         <div class="row text-center">
             <div class="col-lg-3 px-lg-2">
@@ -182,7 +110,7 @@
                             <use xlink:href="#stack-1"> </use>
                         </svg>
                         <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="#">Marketing</a></h2>
-                        <p class="categories-item-number small mb-0">2 Items</p>
+                        <p class="categories-item-number small mb-0"> Items</p>
                     </div>
                 </div>
             </div>
@@ -237,7 +165,7 @@
                             <use xlink:href="#checked-window-1"> </use>
                         </svg>
                         <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="#">Bass</a></h2>
-                        <p class="categories-item-number small mb-0">2 Items</p>
+                        <p class="categories-item-number small mb-0">3 Items</p>
                     </div>
                 </div>
             </div>
@@ -263,7 +191,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 text-center pt-4"><a class="btn btn-primary" href="@Url.Action("Index", "Positions")">Show all listings</a></div>
+            <div class="col-lg-12 text-center pt-4"><a class="btn btn-primary" href="@Url.Action("Index", "OpenPositions")">Show all listings</a></div>
         </div>
     </div>
 </section>

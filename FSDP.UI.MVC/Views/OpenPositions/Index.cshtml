@@ -1,0 +1,174 @@
+﻿@*@model IEnumerable<FSDP.DATA.EF.OpenPosition>*@
+@model PagedList.IPagedList<FSDP.DATA.EF.OpenPosition>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Open Positions";
+}
+
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row">
+            <!-- Filter-->
+            <div class="col-lg-3 order-2 order-lg-1">
+                <div class="py-5">
+                    <div class="card border-0 shadow-sm mb-4 py-2">
+                        <div class="card-body py-2">
+                            <h2 class="h5 mb-4">Filter by location</h2>
+                            @{
+                                FSDP.DATA.EF.FSDPEntities db = new FSDP.DATA.EF.FSDPEntities();
+                                var locations = db.Locations.OrderBy(item => item.City).ToList();
+                            }
+                            <ul class="custom-control mb-2">
+                                @foreach (var location in locations)
+                                {
+                                    <li style="list-style: none;" class="h5">
+                                        <a href="@Url.Action("Index", "OpenPositions", new { locationid = location.LocationId })" class="nav-link class=@if (ViewBag.LocationID == location.LocationId)
+                                    {
+                                        @Html.Encode(Html.Raw("<html> active </html>"));
+                                    }
+                                    ">@location.City</a>
+                                </li>
+                            }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Listing-->
+            <div class="col-lg-9 mb-5 mb-lg-0 order-1 order-lg-2">
+                <h2 class="text-center">Open Positions</h2>
+                <br />
+                <!-- Listing sorting-->
+                <div class="row mb-4 align-items-center">
+                    <div class="col-md-9">
+                        @using (Html.BeginForm("Index", "OpenPositions", FormMethod.Get))
+                        {
+                            <div class="list-inline mb-0 input-group">
+                                <div class="col-md-5">
+                                    @Html.TextBox("SearchString", ViewBag.SearchString as string, new { @placeholder = "Search by Position", @class = "form-control" })
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <input type="submit" value="See Results" class="btn btn-primary" />
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    @Html.ActionLink("Reset", "Index", "OpenPositions", null, new { @class = "btn btn-dark btn-sm" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-3 text-md-right">
+                        <p class="h6 mb-0 p-3 p-md-0">Showing @Model.Count of @Model.TotalItemCount</p>
+                        <br />
+                        <p>Page @Model.PageNumber of @Model.PageCount</p>
+                    </div>
+                    <!-- Listing items-->
+                    <div class="row mb-4">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-6 mb-4">
+                                <div class="card shadow-sm border-0 reset-anchor d-block hover-transition">
+                                    <div class="d-block dark-overlay card-img-top overflow-hidden tool-trending">
+
+                                        @* Location Symbols *@
+                                        @if (item.LocationId == 1)
+                                        {
+                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/KansasCity.png" alt="..." width="60"></div>
+                                        }
+                                        @if (item.LocationId == 2)
+                                        {
+                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/Topeka.jfif" alt="..." width="60"></div>
+                                        }
+                                        @if (item.LocationId == 3)
+                                        {
+                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/Springfield.jfif" alt="..." width="60"></div>
+                                        }
+                                        @if (item.LocationId == 4)
+                                        {
+                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/Columbia.jpeg" alt="..." width="60"></div>
+                                        }
+                                        @if (item.LocationId == 5)
+                                        {
+                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/StLouis.png" alt="..." width="60"></div>
+                                        }
+
+                                        @* Job Type symbols *@
+                                        @{
+                                            if (item.Position.Title.Contains("Beginner"))
+                                            {
+                                                <ul class="list-inline tool-rating mb-0">
+                                                    <li class="list-inline-item m-0"><i class="fas fa-star text-white"></i></li>
+                                                </ul>
+                                            }
+                                            else if (item.Position.Title.Contains("Intermediate"))
+                                            {
+                                                <ul class="list-inline tool-rating mb-0">
+                                                    <li class="list-inline-item m-0"><i class="fas fa-star text-white"></i></li>
+                                                    <li class="list-inline-item m-0"><i class="fas fa-star text-white"></i></li>
+                                                </ul>
+                                            }
+                                            else if (item.Position.Title.Contains("Advanced"))
+                                            {
+                                                <ul class="list-inline tool-rating mb-0">
+                                                    <li class="list-inline-item m-0"><i class="fas fa-star text-white"></i></li>
+                                                    <li class="list-inline-item m-0"><i class="fas fa-star text-white"></i></li>
+                                                    <li class="list-inline-item m-0"><i class="fas fa-star text-white"></i></li>
+                                                </ul>
+                                            }
+                                            else
+                                            {
+                                                <ul class="list-inline tool-rating mb-0"><li class="list-inline-item m-0"><i class="fas fa-business-time fa-2x"></i></li></ul>
+                                            }
+                                        }
+
+                                        @* Dynamic Image *@
+                                        @{
+                                            if (item.Position.Title.Contains("Bass"))
+                                            {
+                                                <div class="overlay-content"><img class="img-fluid" src="~/Content/img/bass.jpg" alt="..."></div>
+                                            }
+                                            else if (item.Position.Title.Contains("Drum"))
+                                            {
+                                                <div class="overlay-content"><img class="img-fluid" src="~/Content/img/drum.jpeg" alt="..."></div>
+                                            }
+                                            else if (item.Position.Title.Contains("Guitar"))
+                                            {
+                                                <div class="overlay-content"><img class="img-fluid" src="~/Content/img/guitar.jpg" alt="..."></div>
+                                            }
+                                            else if (item.Position.Title.Contains("Piano"))
+                                            {
+                                                <div class="overlay-content"><img class="img-fluid" src="~/Content/img/piano.jpg" alt="..."></div>
+                                            }
+                                            else if (item.Position.Title.Contains("Vocal"))
+                                            {
+                                                <div class="overlay-content"><img class="img-fluid" src="~/Content/img/vocal.jpg" alt="..."></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="overlay-content"><img class="img-fluid" src="~/Content/img/cat-tool-bg-1.jpg" alt="..."></div>
+                                            }
+                                        }
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <h3 class="h5 text-center"> <a class="stretched-link reset-anchor">@item.Position.Title</a></h3>
+                                        <h6 class="text-center">@item.Location.City</h6>
+                                        <p class="text-muted text-small mb-0">@item.Position.JobDescription</p>
+                                        <br />
+                                        <div class="text-center applyNow">
+                                            <button type="submit" class="btn btn-dark btn-m p-2">One Click Apply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- Pagination-->
+                    <div class="col-lg-9 text-center">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
