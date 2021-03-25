@@ -9,14 +9,17 @@
             <div class="col-lg-7 mx-auto text-center">
                 <p class="h6 text-uppercase text-primary mb-3">Search Open Positions</p>
                 <h1 class="mb-5">Find the position that suits your skills</h1>
-                <form class="p-2 rounded shadow-sm bg-white" action="#">
+                <div class="p-2 rounded shadow-sm bg-white" action="#">
+                    @using (Html.BeginForm("Index", "OpenPositions", FormMethod.Get))
+                    {
                     <div class="input-group">
-                        <input class="form-control border-0 mr-2" type="search" placeholder="Search by position title...">
+                        <input class="form-control border-0 mr-2" id="SearchString" name="SearchString" placeholder="Search by Position" type="text" value="">
                         <div class="input-group-append rounded">
                             <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
-                </form>
+                    }
+                </div>
             </div>
         </div>
     </div>
@@ -96,7 +99,7 @@
     </div>
 </section>
 <!-- Categories section-->
-<section class="pb-5">
+@*<section class="pb-5">
     <div class="container pb-5">
         <header class="text-center mb-5">
             <h2 class="mb-1">Explore by position</h2>
@@ -194,4 +197,4 @@
             <div class="col-lg-12 text-center pt-4"><a class="btn btn-primary" href="@Url.Action("Index", "OpenPositions")">Show all listings</a></div>
         </div>
     </div>
-</section>
+</section>*@

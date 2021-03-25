@@ -1,4 +1,13 @@
 ﻿@using Microsoft.AspNet.Identity
+@using System.ComponentModel.DataAnnotations;
+@using FSDP.DATA.EF;
+
+@{ 
+    FSDPEntities db = new FSDPEntities();
+    string userID = User.Identity.GetUserId();
+    var user = db.UserDetails.Where(x => x.UserId == userID).SingleOrDefault();
+}
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -6,13 +15,13 @@
         @Html.AntiForgeryToken()
 
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink(User.Identity.Name, "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li class="welcomeNav"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     }
 }
 else
 {
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li class="welcomeNav">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }

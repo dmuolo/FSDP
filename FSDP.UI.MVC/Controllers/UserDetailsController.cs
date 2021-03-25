@@ -116,7 +116,7 @@ namespace FSDP.UI.MVC.Controllers
                     if (goodExts.Contains(ext.ToLower()) && (resume.ContentLength <= 4194304))
                     {
                         resumeName = Guid.NewGuid() + ext.ToLower();
-                        string savePath = Server.MapPath("~/Content/resumes/");    
+                        string savePath = Server.MapPath("~/Content/resumes/");   
 
                         if (userDetail.ResumeFilename != null)
                         {
@@ -124,6 +124,7 @@ namespace FSDP.UI.MVC.Controllers
                         }
 
                         userDetail.ResumeFilename = resumeName;
+                        resume.SaveAs(savePath + resumeName);
                     }
                 }
                 db.Entry(userDetail).State = EntityState.Modified;
