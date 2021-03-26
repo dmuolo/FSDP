@@ -9,12 +9,30 @@ using System.Web.Mvc;
 using FSDP.DATA.EF;
 using PagedList.Mvc;
 using PagedList;
+using Microsoft.AspNet.Identity;
 
 namespace FSDP.UI.MVC.Controllers
 {
     public class OpenPositionsController : Controller
     {
         private FSDPEntities db = new FSDPEntities();
+
+        public ActionResult Apply(int id)
+        {
+            string userid = User.Identity.GetUserId();
+            UserDetail user = db.UserDetails.Find(userid);
+            string resume = user.ResumeFilename;
+            Application app = new Application();
+            app.OpenPositionId = id;
+            app.UserId = userid;
+            app.ApplicationDate = DateTime.Now;
+            app.ApplicationStatus = 1;
+            app.ResumeFilename = resume;
+            db.Applications.Add(app);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "OpenPositions");
+        }
 
         // GET: OpenPositions
         public ActionResult Index(string searchString, int page = 1, int locationid = -1)
@@ -39,6 +57,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(openPositions.ToPagedList(page, pageSize));
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         // GET: OpenPositions/Details/5
         public ActionResult Details(int? id)
         {
@@ -54,6 +73,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(openPosition);
         }
 
+        [Authorize(Roles = "Manager")]
         // GET: OpenPositions/Create
         public ActionResult Create()
         {
@@ -62,6 +82,7 @@ namespace FSDP.UI.MVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Manager")]
         // POST: OpenPositions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -81,6 +102,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(openPosition);
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         // GET: OpenPositions/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -97,7 +119,7 @@ namespace FSDP.UI.MVC.Controllers
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", openPosition.PositionId);
             return View(openPosition);
         }
-
+        [Authorize(Roles = "Admin,Manager")]
         // POST: OpenPositions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -116,6 +138,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(openPosition);
         }
 
+        [Authorize(Roles = "Manager")]
         // GET: OpenPositions/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -131,6 +154,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(openPosition);
         }
 
+        [Authorize(Roles = "Manager")]
         // POST: OpenPositions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

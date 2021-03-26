@@ -3,37 +3,49 @@
 @{
     ViewBag.Title = "Index";
 }
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row text-center">
+            <div class="col-lg-12 mx-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-5">
+                        <h2 class="h3 mb-4 text-center">Application Statuses</h2>
+                        <div class="row">
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Description
+                                    </th>
+                                    <th></th>
+                                </tr>
 
-<h2>Index</h2>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StatusName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StatusDescription)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationStatusId }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationStatusId })
+                                        </td>
+                                    </tr>
+                                }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusDescription)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ApplicationStatusId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ApplicationStatusId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ApplicationStatusId })
-        </td>
-    </tr>
-}
-
-</table>
+                            </table>
+                            <p class="mx-auto">
+                                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-dark" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

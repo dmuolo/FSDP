@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace FSDP.DATA.EF.Metadata
+namespace FSDP.DATA.EF/*.Metadata*/
 {
     #region Application Metadata
 
@@ -162,7 +162,10 @@ namespace FSDP.DATA.EF.Metadata
     [MetadataType(typeof(UserDetailMetadata))]
     public partial class UserDetail
     {
-
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
     }
 
     #endregion
