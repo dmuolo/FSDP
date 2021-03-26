@@ -1,6 +1,7 @@
 ﻿@*@model IEnumerable<FSDP.DATA.EF.OpenPosition>*@
 @model PagedList.IPagedList<FSDP.DATA.EF.OpenPosition>
 @using PagedList.Mvc;
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Open Positions";
@@ -155,10 +156,17 @@
                                         <h6 class="text-center" style="color: #4e66f8;">@item.Location.City</h6>
                                         <p class="text-muted text-small mb-0">@item.Position.JobDescription</p>
                                         <br />
-                                        <div class="text-center applyNow">
-                                            @Html.ActionLink("Apply", "Apply", "OpenPositions", new { id = item.OpenPositionId }, new { @class = "btn btn-dark btn-md p-2" })
-                                            @*<button type="button" class="btn btn-dark btn-m p-2" onclick="@Url.Action("Apply", "OpenPositions")">One Click Apply</button>*@
-                                        </div>
+
+                                        @if (item.HasApplied == true)
+                                        {
+                                            <h6 class="text-center">Applied</h6>
+                                        }
+                                        else
+                                        {
+                                            <div class="text-center">
+                                                @Html.ActionLink("Apply", "Apply", "OpenPositions", new { id = item.OpenPositionId }, new { @class = "btn btn-dark btn-md p-2" })
+                                            </div>
+                                        }
                                         @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
                                         {
                                             <div class="mx-auto col-lg-5 " style="display: inline-block;">
@@ -177,7 +185,7 @@
                         }
                     </div>
                     <!-- Pagination-->
-                    <div class="col-lg-9 text-center">
+                    <div class="col-lg-9 text-center mx-auto">
                         @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))
                     </div>
                 </div>

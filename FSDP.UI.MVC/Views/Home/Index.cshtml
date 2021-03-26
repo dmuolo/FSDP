@@ -6,18 +6,18 @@
 <section class="hero-home py-5">
     <div class="container pt-5">
         <div class="row">
-            <div class="col-lg-7 mx-auto text-center">
+            <div class="col-lg-8 mx-auto text-center">
                 <p class="h6 text-uppercase text-primary mb-3">Search Open Positions</p>
-                <h1 class="mb-5">Find the position that suits your skills</h1>
+                <h1 class="mb-5" id="type">Find the position that suits your skills</h1>
                 <div class="p-2 rounded shadow-sm bg-white" action="#">
                     @using (Html.BeginForm("Index", "OpenPositions", FormMethod.Get))
                     {
-                    <div class="input-group">
-                        <input class="form-control border-0 mr-2" id="SearchString" name="SearchString" placeholder="Search by Position" type="text" value="">
-                        <div class="input-group-append rounded">
-                            <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search"></i></button>
+                        <div class="input-group ui-widget">
+                            <input class="form-control border-0 mr-2"name="SearchString" placeholder="Search by Position" type="text" value="">
+                            <div class="input-group-append rounded">
+                                <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
                         </div>
-                    </div>
                     }
                 </div>
             </div>
@@ -98,103 +98,8 @@
         </div>
     </div>
 </section>
-<!-- Categories section-->
-@*<section class="pb-5">
-    <div class="container pb-5">
-        <header class="text-center mb-5">
-            <h2 class="mb-1">Explore by position</h2>
-            <p class="text-muted text-small">Click a category to see open positions</p>
-        </header>
-        <div class="row text-center">
-            <div class="col-lg-3 px-lg-2">
-                <div class="categories-item card border-0 shadow mb-4 reset-anchor hover-transition">
-                    <div class="card-body px-4 py-5">
-                        <svg class="svg-icon mb-3">
-                            <use xlink:href="#stack-1"> </use>
-                        </svg>
-                        <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="#">Marketing</a></h2>
-                        <p class="categories-item-number small mb-0"> Items</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 px-lg-2">
-                <div class="categories-item card border-0 shadow mb-4 reset-anchor hover-transition">
-                    <div class="card-body px-4 py-5">
-                        <svg class="svg-icon mb-3">
-                            <use xlink:href="#pie-chart-1"> </use>
-                        </svg>
-                        <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="#">Management</a></h2>
-                        <p class="categories-item-number small mb-0">2 Items</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 px-lg-2">
-                <div class="categories-item card border-0 shadow mb-4 reset-anchor hover-transition">
-                    <div class="card-body px-4 py-5">
-                        <svg class="svg-icon mb-3">
-                            <use xlink:href="#design-1"> </use>
-                        </svg>
-                        <h2 class="h5">Guitar<a class="stretched-link reset-anchor-inherit" href="#"></a></h2>
-                        <p class="categories-item-number small mb-0">2 Items</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 px-lg-2">
-                <div class="categories-item card border-0 shadow mb-4 reset-anchor hover-transition">
-                    <div class="card-body px-4 py-5">
-                        <svg class="svg-icon mb-3">
-                            <use xlink:href="#mental-health-1"> </use>
-                        </svg>
-                        <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="#">Piano</a></h2>
-                        <p class="categories-item-number small mb-0">2 Items</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 px-lg-2">
-                <div class="categories-item card border-0 shadow mb-4 reset-anchor hover-transition">
-                    <div class="card-body px-4 py-5">
-                        <svg class="svg-icon mb-3">
-                            <use xlink:href="#bookmark-1"> </use>
-                        </svg>
-                        <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="#">Drums</a></h2>
-                        <p class="categories-item-number small mb-0">2 Items</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 px-lg-2">
-                <div class="categories-item card border-0 shadow mb-4 reset-anchor hover-transition">
-                    <div class="card-body px-4 py-5">
-                        <svg class="svg-icon mb-3">
-                            <use xlink:href="#checked-window-1"> </use>
-                        </svg>
-                        <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="#">Bass</a></h2>
-                        <p class="categories-item-number small mb-0">3 Items</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 px-lg-2">
-                <div class="categories-item card border-0 shadow mb-4 reset-anchor hover-transition">
-                    <div class="card-body px-4 py-5">
-                        <svg class="svg-icon mb-3">
-                            <use xlink:href="#list-details-1"> </use>
-                        </svg>
-                        <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="#">Operations</a></h2>
-                        <p class="categories-item-number small mb-0">2 Items</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 px-lg-2">
-                <div class="categories-item card border-0 shadow mb-4 reset-anchor hover-transition">
-                    <div class="card-body px-4 py-5">
-                        <svg class="svg-icon mb-3">
-                            <use xlink:href="#sales-up-1"> </use>
-                        </svg>
-                        <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="#">Vocals</a></h2>
-                        <p class="categories-item-number small mb-0">2 Items</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 text-center pt-4"><a class="btn btn-primary" href="@Url.Action("Index", "OpenPositions")">Show all listings</a></div>
-        </div>
-    </div>
-</section>*@
+@section scripts{
+    <script>
+        $("#type").t({ speed: 60 });
+    </script>
+}

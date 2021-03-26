@@ -96,7 +96,7 @@ namespace FSDP.DATA.EF/*.Metadata*/
     [MetadataType(typeof(OpenPositionMetadata))]
     public partial class OpenPosition
     {
-
+        public Boolean HasApplied { get; set; }
     }
 
     #endregion

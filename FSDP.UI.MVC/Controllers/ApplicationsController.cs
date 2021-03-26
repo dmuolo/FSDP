@@ -15,6 +15,7 @@ namespace FSDP.UI.MVC.Controllers
     {
         private FSDPEntities db = new FSDPEntities();
 
+        [Authorize(Roles = "Admin,Manager,Employee")]
         // GET: Applications
         public ActionResult Index()
         {
@@ -22,7 +23,13 @@ namespace FSDP.UI.MVC.Controllers
            
             var applications = db.Applications.Include(a => a.ApplicationStatu).Include(a => a.OpenPosition).Include(a => a.UserDetail);
 
-            if (User.IsInRole("Manager"))
+            if (User.IsInRole("Employee") && !User.IsInRole("Manager"))
+            {
+                applications = db.Applications.Where(a => a.UserId == userID);
+                return View(applications.ToList());
+            }
+
+            else if (User.IsInRole("Manager"))
             {
                 applications = db.Applications.Where(a => a.OpenPosition.Location.ManagerId == userID);
                 return View(applications.ToList());

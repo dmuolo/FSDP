@@ -214,6 +214,8 @@
     <Content Include="Content\img\Topeka.png" />
     <Content Include="Content\img\vocal.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\vendor\t-js\t.js" />
+    <Content Include="Content\vendor\t-js\t.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -222,6 +224,8 @@
     <Content Include="_Archive\distribution\img\bass.jfif" />
     <Content Include="_Archive\distribution\img\bass.jpg" />
     <Content Include="_Archive\distribution\img\bass.png" />
+    <Content Include="Content\vendor\t-js\LICENSE" />
+    <Content Include="Content\vendor\t-js\README.md" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

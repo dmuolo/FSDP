@@ -41,6 +41,20 @@ namespace FSDP.UI.MVC.Controllers
             int pageSize = 8;
             var openPositions = db.OpenPositions.OrderBy(o => o.Position.Title).ToList();
 
+            //list of user's applications
+            var userApps = db.Applications.Where(ua => ua.UserId == userID);
+
+            foreach (var op in openPositions)
+            {
+                foreach (var ua in userApps)
+                {
+                    if (op.OpenPositionId == ua.OpenPositionId)
+                    {
+                        op.HasApplied = true;
+                    }
+                }
+            }
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 openPositions = openPositions.Where(o => o.Position.Title.ToLower().Contains(searchString.ToLower())).ToList();

@@ -9,6 +9,7 @@ namespace FSDP.UI.MVC
         {
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                 "~/Content/vendor/bootstrap/css/bootstrap.min.css",
+                "~/Content/PagedList.css",
                 "~/Content/vendor/owl.carousel2/assets/owl.carousel.min.css",
                 "~/Content/vendor/owl.carousel2/assets/owl.theme.default.min.css",
                 "~/Content/vendor/bootstrap-select/css/bootstrap-select.min.css",
@@ -25,7 +26,9 @@ namespace FSDP.UI.MVC
                 "~/Content/vendor/bootstrap-select/js/bootstrap-select.min.js",
                 "~/Content/vendor/lightbox2/js/lightbox.min.js",
                 "~/Content/js/bootstrap-filestyle.min.js",
-                "~/Content/js/front.js"
+                "~/Content/js/front.js",
+                "~/Content/vendor/t-js/t.js",
+                "~/Content/vendor/t-js/t.min.js"
                 ));
             //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
             //            "~/Scripts/jquery-{version}.js"));
