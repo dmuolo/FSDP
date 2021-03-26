@@ -36,9 +36,6 @@
                         <li class="nav-item">
                             <!-- Navbar link--><a class="nav-link" href="@Url.Action("Index", "OpenPositions")">Openings</a>
                         </li>
-                        <li class="nav-item">
-                            <!-- Navbar link--><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
                             <div class="dropdown-menu mt-lg-3">
@@ -62,7 +59,13 @@
                                 }
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <!-- Navbar link--><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
+                        </li>
+                        @if (User.IsInRole("Manager"))
+                        {
                         @*<li class="nav-item ml-lg-2 py-2 py-lg-0"><a class="btn btn-primary" href="#listingModal" data-toggle="modal">Add listing</a></li>*@
+                        }
                     </ul>
                 </div>
             </div>

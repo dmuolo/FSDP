@@ -37,6 +37,7 @@ namespace FSDP.UI.MVC.Controllers
         // GET: OpenPositions
         public ActionResult Index(string searchString, int page = 1, int locationid = -1)
         {
+            string userID = User.Identity.GetUserId();
             int pageSize = 8;
             var openPositions = db.OpenPositions.OrderBy(o => o.Position.Title).ToList();
 
@@ -50,11 +51,20 @@ namespace FSDP.UI.MVC.Controllers
                 openPositions = openPositions.Where(o => o.LocationId == locationid).ToList();
             }
 
-            ViewBag.SearchString = searchString;
+            if (User.IsInRole("Manager"))
+            {
+                openPositions = db.OpenPositions.Where(o => o.Location.ManagerId == userID).ToList();
+                return View(openPositions.ToPagedList(page, pageSize));
+            }
+            else
+            {
 
-            ViewBag.LocationID = locationid;
+                ViewBag.SearchString = searchString;
 
-            return View(openPositions.ToPagedList(page, pageSize));
+                ViewBag.LocationID = locationid;
+
+                return View(openPositions.ToPagedList(page, pageSize));
+            }
         }
 
         [Authorize(Roles = "Admin,Manager")]
@@ -119,6 +129,7 @@ namespace FSDP.UI.MVC.Controllers
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", openPosition.PositionId);
             return View(openPosition);
         }
+
         [Authorize(Roles = "Admin,Manager")]
         // POST: OpenPositions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

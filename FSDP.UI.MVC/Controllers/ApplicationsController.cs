@@ -18,8 +18,19 @@ namespace FSDP.UI.MVC.Controllers
         // GET: Applications
         public ActionResult Index()
         {
+            string userID = User.Identity.GetUserId();
+           
             var applications = db.Applications.Include(a => a.ApplicationStatu).Include(a => a.OpenPosition).Include(a => a.UserDetail);
-            return View(applications.ToList());
+
+            if (User.IsInRole("Manager"))
+            {
+                applications = db.Applications.Where(a => a.OpenPosition.Location.ManagerId == userID);
+                return View(applications.ToList());
+            }
+            else
+            {
+                return View(applications.ToList());
+            }
         }
 
         // GET: Applications/Details/5
@@ -66,6 +77,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(application);
         }
 
+        [Authorize(Roles = "Manager,Employee")]
         // GET: Applications/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -84,6 +96,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(application);
         }
 
+        [Authorize(Roles = "Manager,Employee")]
         // POST: Applications/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -103,6 +116,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(application);
         }
 
+        [Authorize(Roles = "None")]
         // GET: Applications/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -118,6 +132,7 @@ namespace FSDP.UI.MVC.Controllers
             return View(application);
         }
 
+        [Authorize(Roles = "None")]
         // POST: Applications/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

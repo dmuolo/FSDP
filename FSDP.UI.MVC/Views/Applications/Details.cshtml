@@ -4,63 +4,81 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row text-center">
+            <div class="col-lg-10 mx-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-5">
+                        <h2 class="h3 mb-4 text-center">Application Overview</h2>
+                        <div>
+                            <dl>
+                                @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                                {
+                                    <dt>
+                                        Applicant
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => Model.UserDetail.FirstName) @Html.DisplayFor(model => Model.UserDetail.LastName)
+                                    </dd>
+                                }
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.ApplicationDate)
+                                    </dt>
 
-<div>
-    <h4>Application</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationDate)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.ApplicationDate)
+                                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationDate)
-        </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.ManagerNotes)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ManagerNotes)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.ManagerNotes)
+                                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ManagerNotes)
-        </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.ResumeFilename)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ResumeFilename)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.ResumeFilename)
+                                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ResumeFilename)
-        </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.ApplicationStatu.StatusName)
+                                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationStatu.StatusName)
-        </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.OpenPosition.Position.Title)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OpenPosition.OpenPositionId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserDetail.FirstName)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.OpenPosition.Position.Title)
+                                    </dd>
+                                <dt>
+                                    Location
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.OpenPosition.Location.City)
+                                </dd>
+                                </dl>
+                        </div>
+                        <p>
+                            @if (User.IsInRole("Manager"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.ApplicationId }) <text>|</text>
+                            }
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

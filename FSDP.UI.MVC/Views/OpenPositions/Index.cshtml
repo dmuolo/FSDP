@@ -74,23 +74,23 @@
                                         @* Location Symbols *@
                                         @if (item.LocationId == 1)
                                         {
-                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/KansasCity.png" alt="..." width="60"></div>
+                                            <div class="tool-thumb rounded-circle"><img class="img-fluid rounded-circle" src="~/Content/img/KansasCity.png" alt="..." width="60"></div>
                                         }
                                         @if (item.LocationId == 2)
                                         {
-                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/Topeka.jfif" alt="..." width="60"></div>
+                                            <div class="tool-thumb rounded-circle"><img class="img-fluid rounded-circle" src="~/Content/img/Topeka.jfif" alt="..." width="60"></div>
                                         }
                                         @if (item.LocationId == 3)
                                         {
-                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/Springfield.jfif" alt="..." width="60"></div>
+                                            <div class="tool-thumb rounded-circle"><img class="img-fluid rounded-circle" src="~/Content/img/Springfield.jfif" alt="..." width="60"></div>
                                         }
                                         @if (item.LocationId == 4)
                                         {
-                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/Columbia.jpeg" alt="..." width="60"></div>
+                                            <div class="tool-thumb rounded-circle"><img class="img-fluid rounded-circle" src="~/Content/img/Columbia.jpeg" alt="..." width="60"></div>
                                         }
                                         @if (item.LocationId == 5)
                                         {
-                                            <div class="tool-thumb rounded-circle" href="detail.html"><img class="img-fluid rounded-circle" src="~/Content/img/StLouis.png" alt="..." width="60"></div>
+                                            <div class="tool-thumb rounded-circle"><img class="img-fluid rounded-circle" src="~/Content/img/StLouis.png" alt="..." width="60"></div>
                                         }
 
                                         @* Job Type symbols *@
@@ -156,14 +156,20 @@
                                         <p class="text-muted text-small mb-0">@item.Position.JobDescription</p>
                                         <br />
                                         <div class="text-center applyNow">
-                                            @Html.ActionLink("Apply", "Apply", "OpenPositions", new { id = item.OpenPositionId }, new { @class = "btn btn-dark btn-md p-2"})
+                                            @Html.ActionLink("Apply", "Apply", "OpenPositions", new { id = item.OpenPositionId }, new { @class = "btn btn-dark btn-md p-2" })
                                             @*<button type="button" class="btn btn-dark btn-m p-2" onclick="@Url.Action("Apply", "OpenPositions")">One Click Apply</button>*@
                                         </div>
-                                        @if (User.IsInRole("Admin"))
+                                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
                                         {
-                                        <div class="mx-auto">
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.LocationId })
-                                        </div>
+                                            <div class="mx-auto col-lg-5 " style="display: inline-block;">
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.LocationId })
+                                            </div>
+                                        }
+                                        @if (User.IsInRole("Manager"))
+                                        {
+                                            <div class="text-md-right col-lg-6 ml-3" style="display: inline-block;">
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.LocationId })
+                                            </div>
                                         }
                                     </div>
                                 </div>

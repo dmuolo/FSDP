@@ -2,3 +2,7 @@
 .form-group {
 
 }
+
+.stretched-link::after{
+    position: static;
+}

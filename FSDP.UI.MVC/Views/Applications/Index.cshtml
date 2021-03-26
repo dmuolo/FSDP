@@ -14,54 +14,56 @@
                         <div class="row">
                             <table class="table">
                                 <tr>
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                                    {
+                                        <th>
+                                            Applicant
+                                        </th>
+                                    }
                                     <th>
                                         @Html.DisplayNameFor(model => model.ApplicationDate)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.ManagerNotes)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.ResumeFilename)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionId)
+                                        @Html.DisplayNameFor(model => model.OpenPosition.Position.Title)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+                                        @Html.DisplayNameFor(model => model.OpenPosition.Location.City)
                                     </th>
                                     <th></th>
                                 </tr>
 
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
+                                <tr>
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                                    {
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.ApplicationDate)
+                                            @Html.DisplayFor(modelItem => item.UserDetail.FirstName) @Html.DisplayFor(modelItem => item.UserDetail.LastName)
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ManagerNotes)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ResumeFilename)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.OpenPosition.OpenPositionId)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.ApplicationId }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })
-                                        </td>
-                                    </tr>
+                                    }
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ApplicationDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OpenPosition.Position.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OpenPosition.Location.City)
+                                    </td>
+                                    <td>
+                                        @if (User.IsInRole("Manager") || User.IsInRole("Employee"))
+                                        {
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }) <text>|</text>
+                                        }
+                                        @Html.ActionLink("Details", "Details", new { id = item.ApplicationId })
+                                    </td>
+                                </tr>
                                 }
 
                             </table>

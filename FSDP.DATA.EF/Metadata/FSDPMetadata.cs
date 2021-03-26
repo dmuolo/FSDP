@@ -13,7 +13,7 @@ namespace FSDP.DATA.EF/*.Metadata*/
     {
         [Required(ErrorMessage = "* Day/time applied is required *")]
         [Display(Name = "Applied")]
-        [DisplayFormat(DataFormatString = "{0:f}")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public System.DateTime ApplicationDate { get; set; }
 
         [Display(Name = "Notes")]
