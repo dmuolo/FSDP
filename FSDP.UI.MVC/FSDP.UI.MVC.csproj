@@ -201,7 +201,10 @@
     <Content Include="Content\img\bass.jpg" />
     <Content Include="Content\img\Columbia.jpeg" />
     <Content Include="Content\img\data.png" />
+    <Content Include="Content\img\derek-truninger-uLitVttkC7o-unsplash.jpg" />
+    <Content Include="Content\img\dominik-scythe-MTO5SmPraX4-unsplash.jpg" />
     <Content Include="Content\img\drum.jpeg" />
+    <Content Include="Content\img\gabriel-barletta--lWcaUVJ39Y-unsplash.jpg" />
     <Content Include="Content\img\guitar.jpg" />
     <Content Include="Content\img\KansasCity.png" />
     <Content Include="Content\img\UserImage\noImage.png" />
@@ -213,6 +216,7 @@
     <Content Include="Content\img\Topeka.jfif" />
     <Content Include="Content\img\Topeka.png" />
     <Content Include="Content\img\vocal.jpg" />
+    <Content Include="Content\img\wes-hicks-MEL-jJnm7RQ-unsplash.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\vendor\t-js\t.js" />
     <Content Include="Content\vendor\t-js\t.min.js" />
