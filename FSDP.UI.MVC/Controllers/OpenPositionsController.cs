@@ -10,6 +10,7 @@ using FSDP.DATA.EF;
 using PagedList.Mvc;
 using PagedList;
 using Microsoft.AspNet.Identity;
+using FSDP.UI.MVC.Models;
 
 namespace FSDP.UI.MVC.Controllers
 {
@@ -101,7 +102,11 @@ namespace FSDP.UI.MVC.Controllers
         // GET: OpenPositions/Create
         public ActionResult Create()
         {
-            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "City");
+            string userid = User.Identity.GetUserId();
+            UserDetail user = db.UserDetails.Find(userid);
+            var location = db.Locations.Where(l => l.ManagerId == userid).SingleOrDefault();
+            //want manager's id to match
+            ViewBag.LocationId = location;
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title");
             return View();
         }
@@ -121,7 +126,10 @@ namespace FSDP.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.LocationId = new SelectList(db.Locations, "LocationId", "City", openPosition.LocationId);
+            string userid = User.Identity.GetUserId();
+            UserDetail user = db.UserDetails.Find(userid);
+            var location = db.Locations.Where(l => l.ManagerId == userid).SingleOrDefault();
+            ViewBag.LocationId = location;
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", openPosition.PositionId);
             return View(openPosition);
         }
