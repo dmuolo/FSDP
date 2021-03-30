@@ -75,9 +75,12 @@ namespace FSDP.DATA.EF/*.Metadata*/
     }
 
     [MetadataType(typeof(LocationMetadata))]
-    public partial class Lcation
+    public partial class Location
     {
-
+        public string FullName
+        {
+            get { return UserDetail.FirstName + " " + UserDetail.LastName; }
+        }
     }
 
     #endregion
@@ -166,6 +169,8 @@ namespace FSDP.DATA.EF/*.Metadata*/
         {
             get { return FirstName + " " + LastName; }
         }
+
+        public Boolean HasResume { get; set; }
     }
 
     #endregion

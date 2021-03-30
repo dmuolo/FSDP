@@ -10,19 +10,19 @@
             <div class="col-lg-9 mx-auto">
                 <div class="card border-0 shadow">
                     <div class="card-body p-5">
-                        <h2 class="h3 mb-4 text-center">Account Overview</h2>
-                        <div class="row">
+                        <h2 class="h3 mb-4 text-center mx-auto">Account Overview</h2>
+                        <div class="row mx-auto">
                             @using (Html.BeginForm("Edit", "UserDetails", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 @Html.AntiForgeryToken()
 
-                                <div class="form-horizontal">
+                                <div class="form-horizontal mx-auto">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    @Html.HiddenFor(model => model.UserId)
+                                    @Html.HiddenFor(Model => Model.UserId)
 
-                                    @Html.HiddenFor(x => x.Image)
+                                    @Html.HiddenFor(Model => Model.Image)
 
-                                    @Html.HiddenFor(x => x.ResumeFilename)
+                                    @Html.HiddenFor(Model => Model.ResumeFilename)
 
                                     <div class="form-group">
                                         <h6>First Name</h6>

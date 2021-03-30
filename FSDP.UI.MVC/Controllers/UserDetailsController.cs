@@ -156,7 +156,7 @@ namespace FSDP.UI.MVC.Controllers
                 }
                 db.Entry(userDetail).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = userDetail.UserId });
             }
             return View(userDetail);
         }

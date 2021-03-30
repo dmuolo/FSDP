@@ -56,6 +56,8 @@
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <a class="dropdown-item" href="@Url.Action("Index", "Positions")">Positions</a>
+                                    <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">Users</a>
+
                                 }
                             </div>
                         </li>
@@ -74,14 +76,17 @@
             </ul>
         </nav>
     </header>
-    <!--  Modal -->
-    <div class="modal fade" id="listingModal" tabindex="-1" role="dialog" aria-labelledby="listingModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                @Html.Partial("CreateOpening", new FSDP.DATA.EF.OpenPosition())
+    @if (User.IsInRole("Manager"))
+    {
+        <!--  Modal -->
+        <div class="modal fade" id="listingModal" tabindex="-1" role="dialog" aria-labelledby="listingModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    @Html.Partial("CreateOpening", new FSDP.DATA.EF.OpenPosition())
+                </div>
             </div>
         </div>
-    </div>
+    }
 
     @RenderBody()
 

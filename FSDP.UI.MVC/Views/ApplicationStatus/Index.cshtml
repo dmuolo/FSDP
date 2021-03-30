@@ -19,7 +19,10 @@
                                     <th>
                                         Description
                                     </th>
-                                    <th></th>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <th></th>
+                                    }
                                 </tr>
 
                                 @foreach (var item in Model)
@@ -31,18 +34,24 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.StatusDescription)
                                         </td>
-                                        <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationStatusId }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationStatusId })
-                                        </td>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationStatusId }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationStatusId })
+                                            </td>
+                                        }
                                     </tr>
                                 }
 
                             </table>
-                            <p class="mx-auto">
-                                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-dark" })
-                            </p>
-                        </div>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <p class="mx-auto">
+                                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-dark" })
+                                </p>
+                            }
+                            </div>
                     </div>
                 </div>
             </div>

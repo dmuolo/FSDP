@@ -18,14 +18,15 @@ namespace FSDP.UI.MVC.Controllers
     {
         private FSDPEntities db = new FSDPEntities();
 
+        [Authorize(Roles = "Employee")]
         public ActionResult Apply(int id)
         {
-            string userid = User.Identity.GetUserId();
-            UserDetail user = db.UserDetails.Find(userid);
+            string userID = User.Identity.GetUserId();
+            UserDetail user = db.UserDetails.Find(userID);
             string resume = user.ResumeFilename;
             Application app = new Application();
             app.OpenPositionId = id;
-            app.UserId = userid;
+            app.UserId = userID;
             app.ApplicationDate = DateTime.Now;
             app.ApplicationStatus = 1;
             app.ResumeFilename = resume;
@@ -54,6 +55,14 @@ namespace FSDP.UI.MVC.Controllers
                         op.HasApplied = true;
                     }
                 }
+            }
+
+            //list of user's resumes
+            UserDetail user = db.UserDetails.Find(userID);
+            string resume = user.ResumeFilename;
+            if (resume != null)
+            {
+                user.HasResume = true;
             }
 
             if (!string.IsNullOrEmpty(searchString))
@@ -102,11 +111,6 @@ namespace FSDP.UI.MVC.Controllers
         // GET: OpenPositions/Create
         public ActionResult Create()
         {
-            string userid = User.Identity.GetUserId();
-            UserDetail user = db.UserDetails.Find(userid);
-            var location = db.Locations.Where(l => l.ManagerId == userid).SingleOrDefault();
-            //want manager's id to match
-            ViewBag.LocationId = location;
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title");
             return View();
         }
@@ -119,6 +123,11 @@ namespace FSDP.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OpenPositionId,PositionId,LocationId")] OpenPosition openPosition)
         {
+            string userid = User.Identity.GetUserId();
+            UserDetail user = db.UserDetails.Find(userid);
+            var location = db.Locations.Where(l => l.ManagerId == userid).SingleOrDefault();
+            openPosition.LocationId = location.LocationId;
+
             if (ModelState.IsValid)
             {
                 db.OpenPositions.Add(openPosition);
@@ -126,10 +135,6 @@ namespace FSDP.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            string userid = User.Identity.GetUserId();
-            UserDetail user = db.UserDetails.Find(userid);
-            var location = db.Locations.Where(l => l.ManagerId == userid).SingleOrDefault();
-            ViewBag.LocationId = location;
             ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", openPosition.PositionId);
             return View(openPosition);
         }

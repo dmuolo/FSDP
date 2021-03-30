@@ -19,6 +19,14 @@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.ApplicationId)
 
+                            @Html.HiddenFor(x => x.UserId)
+
+                            @Html.HiddenFor(x => x.OpenPositionId)
+
+                            @Html.HiddenFor(x => x.ApplicationDate)
+
+                            @Html.HiddenFor(x => x.ResumeFilename)
+
                             @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
                             {
                                 <div class="form-group">
