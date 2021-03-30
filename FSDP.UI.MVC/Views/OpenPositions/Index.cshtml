@@ -168,11 +168,17 @@
 
                                             string userid = User.Identity.GetUserId();
                                             UserDetail user = db.UserDetails.Find(userid);
+
+                                            string resume = user.ResumeFilename;//user's resume
+                                            if (string.IsNullOrEmpty(resume))
+                                            {
+                                                user.HasResume = true;
+                                            }
                                         }
 
                                         @if (User.IsInRole("Employee") && !User.IsInRole("Manager"))
                                         {
-                                            if (user.HasResume == false)
+                                            if (user.HasResume == true)
                                             {<div class="text-center mx-auto">
                                                 <a href="~/UserDetails/Edit/@user.UserId">Please Provide a Resume to Apply</a>
                                             </div>

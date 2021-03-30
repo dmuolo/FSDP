@@ -57,14 +57,6 @@ namespace FSDP.UI.MVC.Controllers
                 }
             }
 
-            //list of user's resumes
-            UserDetail user = db.UserDetails.Find(userID);
-            string resume = user.ResumeFilename;
-            if (resume != null)
-            {
-                user.HasResume = true;
-            }
-
             if (!string.IsNullOrEmpty(searchString))
             {
                 openPositions = openPositions.Where(o => o.Position.Title.ToLower().Contains(searchString.ToLower())).ToList();
