@@ -33,42 +33,45 @@
                         <li class="nav-item">
                             <!-- Navbar link--><a class="nav-link" id="Home" href="@Url.Action("Index", "Home")">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <!-- Navbar link--><a class="nav-link" id="Openings" href="@Url.Action("Index", "OpenPositions")">Openings</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="Manage" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
-                            <div class="dropdown-menu mt-lg-3">
-                                <a class="dropdown-item" href="@Url.Action("Index", "Applications")">Applications</a>
-                                @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
-                                {
-                                    <a class="dropdown-item" href="@Url.Action("Index", "ApplicationStatus")">Application Status</a>
-                                }
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <a class="dropdown-item" href="@Url.Action("Index", "Locations")">Locations</a>
-                                }
-                                <a class="dropdown-item" href="@Url.Action("Details", "UserDetails", new { id = User.Identity.GetUserId()})">My Account</a>
-                                @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
-                                {
-                                    <a class="dropdown-item" href="@Url.Action("Index", "OpenPositions")">Open Positions</a>
-                                }
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <a class="dropdown-item" href="@Url.Action("Index", "Positions")">Positions</a>
-                                    <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">Users</a>
-
-                                }
-                            </div>
-                        </li>
-                        <li class="nav-item" id="Contact">
-                            <!-- Navbar link--><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
-                        </li>
-                        @if (User.IsInRole("Manager"))
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item ml-lg-2 py-2 py-lg-0"><a class="btn btn-primary" href="#listingModal" data-toggle="modal">Add listing</a></li>
-                        }
-                    </ul>
+                            <li class="nav-item">
+                                <!-- Navbar link--><a class="nav-link" id="Openings" href="@Url.Action("Index", "OpenPositions")">Openings</a>
+                            </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="Manage" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
+                                    <div class="dropdown-menu mt-lg-3">
+                                        <a class="dropdown-item" href="@Url.Action("Index", "Applications")">Applications</a>
+                                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                                        {
+                                            <a class="dropdown-item" href="@Url.Action("Index", "ApplicationStatus")">Application Status</a>
+                                        }
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <a class="dropdown-item" href="@Url.Action("Index", "Locations")">Locations</a>
+                                        }
+                                        <a class="dropdown-item" href="@Url.Action("Details", "UserDetails", new { id = User.Identity.GetUserId() })">My Account</a>
+                                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                                        {
+                                            <a class="dropdown-item" href="@Url.Action("Index", "OpenPositions")">Open Positions</a>
+                                        }
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <a class="dropdown-item" href="@Url.Action("Index", "Positions")">Positions</a>
+                                            <a class="dropdown-item" href="@Url.Action("Index", "UserDetails")">User Details</a>
+
+                                        }
+                                    </div>
+                                </li>
+                            }
+                            <li class="nav-item" id="Contact">
+                                <!-- Navbar link--><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
+                            </li>
+                            @if (User.IsInRole("Manager"))
+                            {
+                                <li class="nav-item ml-lg-2 py-2 py-lg-0"><a class="btn btn-primary" href="#listingModal" data-toggle="modal">Add listing</a></li>
+                            }
+                        </ul>
                 </div>
             </div>
             <ul class="list-unstyled">

@@ -36,6 +36,7 @@ namespace FSDP.UI.MVC.Controllers
             return RedirectToAction("Index", "OpenPositions");
         }
 
+        [Authorize(Roles = "Admin,Manager,Employee")]
         // GET: OpenPositions
         public ActionResult Index(string searchString, int page = 1, int locationid = -1)
         {
@@ -69,7 +70,8 @@ namespace FSDP.UI.MVC.Controllers
 
             if (User.IsInRole("Manager"))
             {
-                openPositions = db.OpenPositions.Where(o => o.Location.ManagerId == userID).ToList();
+                openPositions = db.OpenPositions.Where(o => o.Location.ManagerId == userID).OrderBy(o => o.Position.Title).ToList();
+
                 return View(openPositions.ToPagedList(page, pageSize));
             }
             else

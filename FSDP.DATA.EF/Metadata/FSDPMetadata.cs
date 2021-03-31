@@ -99,6 +99,7 @@ namespace FSDP.DATA.EF/*.Metadata*/
     [MetadataType(typeof(OpenPositionMetadata))]
     public partial class OpenPosition
     {
+        //used for open position employee view UI/UX
         public Boolean HasApplied { get; set; }
     }
 
@@ -170,6 +171,7 @@ namespace FSDP.DATA.EF/*.Metadata*/
             get { return FirstName + " " + LastName; }
         }
 
+        //used for a resume check for the openpositions view for employees
         public Boolean HasResume { get; set; }
     }
 
